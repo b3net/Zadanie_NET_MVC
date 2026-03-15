@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+    "FirstName": "Adam",
+    "LastName": "Nowak",
+    "Email": "adam.nowak@example.com",
+    "Content": "Dzień dobry, chciałbym zapytać o ofertę.",
+    "CreatedAt": "2026-03-13T15:05:22.4128741+01:00"
+  },
+  {
+    "Id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+    "FirstName": "Beata",
+    "LastName": "Kowalska",
+    "Email": "beata.k@example.pl",
+    "Content": "<b>Ważne:</b> Proszę o pilny kontakt telefoniczny.",
+    "CreatedAt": "2026-03-13T15:22:11.7743219+01:00"
+  },
+  {
+    "Id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+    "FirstName": "Cezary",
+    "LastName": "Wiśniewski",
+    "Email": "cezary.w@test.com",
+    "Content": "Czy posiadają Państwo model X w kolorze niebieskim?",
+    "CreatedAt": "2026-03-13T15:48:05.1128374+01:00"
+  },
+  {
+    "Id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+    "FirstName": "Dorota",
+    "LastName": "Wójcik",
+    "Email": "d.wojcik@mail.pl",
+    "Content": "Dziękuję za szybką odpowiedź na poprzednie zgłoszenie.",
+    "CreatedAt": "2026-03-13T16:40:44.5590123+01:00"
+  },
+  {
+    "Id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
+    "FirstName": "Edward",
+    "LastName": "Mazur",
+    "Email": "edward.m@domain.com",
+    "Content": "Potwierdzam otrzymanie przesyłki.",
+    "CreatedAt": "2026-03-13T16:43:09.3312847+01:00"
+  },
+  {
+    "Id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+    "FirstName": "Filip",
+    "LastName": "Kaczmarek",
+    "Email": "f.kaczmarek@service.pl",
+    "Content": "<i>Uwaga:</i> Adres dostawy uległ zmianie.",
+    "CreatedAt": "2026-03-13T16:45:55.9023745+01:00"
+  },
+  {
+    "Id": "f06e4ece-8dc3-49ef-a589-0d31aeffb347",
+    "FirstName": "Artur",
+    "LastName": "Skrobisz",
+    "Email": "artur.skrobisz@gmail.com",
+    "Content": "<b>Wytyczne:</b><br><ul><li>Wykonać analizę,</li><li>Sporządzić raport,</li></ul><div><b><i><u><font color=\"#4533cc\">Sformatowany tekst</font></u></i></b></div>",
+    "CreatedAt": "2026-03-13T16:46:31.2542938+01:00"
+  }
+]

@@ -1,0 +1,20 @@
+@using Project.Resources
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <div class="navbar-brand fw-bold"> @AppResources.AppName </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Create" ? "active" : "")" href="@Url.Action("Create", "Messages")">@AppResources.FormNav</a>
+                </li>
+                <li>
+                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "List" ? "active" : "")" href="@Url.Action("List", "Messages")">@AppResources.MessagesNav</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

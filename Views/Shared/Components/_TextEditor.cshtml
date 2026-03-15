@@ -1,0 +1,98 @@
+@model string
+@using Project.Resources
+
+@{
+    string propertyName = (string)(ViewBag.PropertyName ?? "Content");
+    string editorId = (string)(ViewBag.EditorId ?? "editor");
+    string hiddenId = (string)(ViewBag.HiddenId ?? "hiddenContent");
+}
+
+<div class="custom-wysiwyg border rounded">
+    <div class="toolbar bg-light border-bottom p-2 d-flex gap-1 flex-wrap">
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="formatEditorDoc('@editorId', 'bold')" title="Pogrubienie" tabindex="-1"><i class="bi bi-type-bold"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="formatEditorDoc('@editorId', 'italic')" title="Kursywa" tabindex="-1"><i class="bi bi-type-italic"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="formatEditorDoc('@editorId', 'underline')" title="Podkreślenie" tabindex="-1"><i class="bi bi-type-underline"></i></button>
+        <div class="vr mx-1"></div>
+        <input type="color" class="form-control form-control-color form-control-sm" onchange="formatEditorDoc('@editorId', 'foreColor', this.value)" title="Kolor czcionki" tabindex="-1">
+        <div class="vr mx-1"></div>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="formatEditorDoc('@editorId', 'insertUnorderedList')" title="Lista punktowana" tabindex="-1"><i class="bi bi-list-ul"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="formatEditorDoc('@editorId', 'insertOrderedList')" title="Lista numerowana" tabindex="-1"><i class="bi bi-list-ol"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-secondary ms-auto" onclick="toggleSourceCode('@editorId', '@hiddenId')" title="Widok HTML / Sformatowany" tabindex="-1"><i class="bi bi-code-slash"></i></button>
+    </div>
+    <div id="@editorId" contenteditable="true" class="editor form-control border-0" style="min-height: 200px; height: auto;" tabindex="0">@Html.Raw(Model)</div>
+    <textarea name="@propertyName" id="@hiddenId" class="form-control border-0 editor-html-view" style="display:none; min-height: 200px; height: auto; font-family: monospace; font-size: 0.9rem; resize: none;">@Model</textarea>
+</div>
+
+
+<script>
+    if (typeof formatEditorDoc !== 'function') {
+        window.formatEditorDoc = function(id, cmd, value) {
+            document.execCommand(cmd, false, value);
+            var editor = document.getElementById(id);
+            editor.focus();
+            $(editor).trigger('input');
+        };
+    }
+
+    if (typeof toggleSourceCode !== 'function') {
+        window.toggleSourceCode = function(editorId, hiddenId) {
+            var $editor = $('#' + editorId);
+            var $hidden = $('#' + hiddenId);
+            var isRichView = $editor.is(':visible');
+
+            if (isRichView) {
+                $editor.hide();
+                $hidden.show().focus();
+                $('.toolbar button:not(.ms-auto), .toolbar input').attr('disabled', true);
+            } else {
+                $editor.html($hidden.val()).show().focus();
+                $hidden.hide();
+                $('.toolbar button:not(.ms-auto), .toolbar input').removeAttr('disabled');
+                $editor.trigger('input');
+            }
+        };
+    }
+
+    $(document).ready(function() {
+        var $editor = $('#@editorId');
+        var $hidden = $('#@hiddenId');
+        var $form = $editor.closest('form');
+
+        function syncContent() {
+            if (!$editor.is(':visible')) {
+                if ($form.data('validator')) {
+                    $form.validate().element($hidden);
+                }
+                return;
+            }
+
+            var html = $editor.html();
+            if (html === '<br>' || html === '<div><br></div>' || html === '<div></div>') {
+                html = '';
+            }
+
+            $hidden.val(html);
+            if ($form.data('validator')) {
+                $form.validate().element($hidden);
+            }
+        }
+
+        $editor.on('input blur keyup paste', function() {
+            syncContent();
+        });
+
+        $hidden.on('input blur keyup paste', function() {
+            syncContent();
+        });
+
+        $form.on('submit', function() {
+            syncContent();
+        });
+
+        syncContent();
+
+        if ($form.data('validator')) {
+            $form.data('validator').settings.ignore = ":hidden:not(#@hiddenId)";
+        }
+    });
+</script>

@@ -1,0 +1,62 @@
+@model dynamic
+@using Project.Resources
+
+@{
+    int totalPages = ViewBag.TotalPages ?? 0;
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    string actionName = ViewBag.PaginationAction ?? "List";
+    string sortOrder = Request.QueryString["sortOrder"];
+
+    int range = 2; 
+}
+
+@if (totalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action(actionName, new { page = 1, sortOrder = sortOrder })" title="@AppResources.FirstPage">
+                    <i class="bi bi-chevron-double-left"></i>
+                </a>
+            </li>
+
+            <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action(actionName, new { page = currentPage - 1, sortOrder = sortOrder })" title="@AppResources.Previous">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+
+            @if (currentPage > range + 1)
+            {
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            }
+
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                if (i >= currentPage - range && i <= currentPage + range)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link px-3" href="@Url.Action(actionName, new { page = i, sortOrder = sortOrder })">@i</a>
+                    </li>
+                }
+            }
+
+            @if (currentPage < totalPages - range)
+            {
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            }
+
+            <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action(actionName, new { page = currentPage + 1, sortOrder = sortOrder })" title="@AppResources.Next">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+
+            <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action(actionName, new { page = totalPages, sortOrder = sortOrder })" title="@AppResources.LastPage">
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+}

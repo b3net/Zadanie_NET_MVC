@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - @Project.Resources.AppResources.AppName</title>
+        
+        @Styles.Render("~/Content/bootstrap-css")
+        @Styles.Render("~/Content/bootstrap-icons")
+        @Styles.Render("~/Content/styles")
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+    </head>
+    <body>
+        @Html.Partial("~/Views/Shared/Partials/_Navbar.cshtml")
+
+        <main class="flex-shrink-0">
+            <div class="container">
+                @Html.Partial("~/Views/Shared/Components/_Notification.cshtml")
+
+                <div class="main-card">
+                    @RenderBody()
+                </div>
+            </div>
+        </main>
+
+        @Html.Partial("~/Views/Shared/Partials/_Footer.cshtml")
+
+        @Scripts.Render("~/bundles/bootstrap-js")
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>
