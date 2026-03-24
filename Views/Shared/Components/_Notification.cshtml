@@ -1,10 +1,10 @@
 <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1100">
-    @if (TempData["SuccessMessage"] != null)
+    @if (@TempData[NotificationKeys.Success] != null)
     {
         <div id="successToast" class="toast align-items-center text-white bg-success border-0">
             <div class="d-flex">
                 <div class="toast-body">
-                    <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+                    <i class="bi bi-check-circle-fill me-2"></i> @TempData[NotificationKeys.Success]
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>

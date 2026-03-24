@@ -1,10 +1,11 @@
-@model dynamic
+@model Project.Models.PaginationViewModel
 @using Project.Resources
 
 @{
-    int totalPages = ViewBag.TotalPages ?? 0;
-    int currentPage = ViewBag.CurrentPage ?? 1;
-    string actionName = ViewBag.PaginationAction ?? "List";
+    int totalPages = Model.TotalPages;
+    int currentPage = Model.CurrentPage;
+    string actionName = Model.PaginationAction;
+
     string sortOrder = Request.QueryString["sortOrder"];
 
     int range = 2; 

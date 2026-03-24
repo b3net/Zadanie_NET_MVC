@@ -121,6 +121,7 @@
     <Compile Include="Attributes\StrictEmailAttribute.cs" />
     <Compile Include="Attributes\NotBlankAttribute.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Helpers\NotificationKeys.cs" />
     <Compile Include="Infrastructure\Data\AppDbContext.cs" />
     <Compile Include="Infrastructure\DbRepositoryStorage.cs" />
     <Compile Include="Infrastructure\FileRepositoryStorage.cs" />
@@ -128,9 +129,11 @@
     <Compile Include="Infrastructure\Messages\MessageFileStorage.cs" />
     <Compile Include="Infrastructure\Messages\MessageDbStorage.cs" />
     <Compile Include="Infrastructure\Messages\MessagePaginator.cs" />
+    <Compile Include="Models\MessageListViewModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Infrastructure\Messages\MessageRepository.cs" />
     <Compile Include="Infrastructure\Messages\MessageSorter.cs" />
+    <Compile Include="Models\PaginationViewModel.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,6 +179,7 @@
     <Content Include="Content\Bootstrap\fonts\bootstrap-icons.woff" />
     <Content Include="Content\Bootstrap\fonts\bootstrap-icons.woff2" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\Components\_MessagePreviewModal.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

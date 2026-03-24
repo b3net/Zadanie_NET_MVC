@@ -22,21 +22,22 @@ namespace Project.Controllers
         {
             ViewBag.Title = AppResources.MessagesTitle;
 
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.FirstNameSortParm = sortOrder == "first_name" ? "first_name_desc" : "first_name";
-            ViewBag.LastNameSortParm = sortOrder == "last_name" ? "last_name_desc" : "last_name";
-            ViewBag.EmailSortParm = sortOrder == "email" ? "email_desc" : "email";
-            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) || sortOrder == "date" ? "date_desc" : "date";
-
-            int pageNumber = (page ?? 1);
-            int totalPages = 0;
-
-            List <MessageModel> messages = _repository.GetMessages(sortOrder, pageNumber, out totalPages, 5);
-
-            ViewBag.TotalPages = totalPages;
-            ViewBag.CurrentPage = pageNumber;
-
-            return View("List", messages);
+            int pageNumber = page ?? 1;
+            int totalPages;
+            var model = new MessageListViewModel
+            {
+                Messages = _repository.GetMessages(sortOrder, pageNumber, out totalPages, 5),
+                Pagination = new PaginationViewModel {
+                    CurrentPage = pageNumber,
+                    TotalPages = totalPages,
+                },
+                CurrentSort = sortOrder,
+                FirstNameSortParm = sortOrder == "first_name" ? "first_name_desc" : "first_name",
+                LastNameSortParm = sortOrder == "last_name" ? "last_name_desc" : "last_name",
+                EmailSortParm = sortOrder == "email" ? "email_desc" : "email",
+                DateSortParm = string.IsNullOrEmpty(sortOrder) || sortOrder == "date" ? "date_desc" : "date"
+            };
+            return View("List", model);
         }
 
         public ActionResult Create()
@@ -57,7 +58,9 @@ namespace Project.Controllers
                     model.Id = Guid.NewGuid();
                     model.CreatedAt = DateTime.Now;
                     _repository.Add(model);
-                    TempData["SuccessMessage"] = AppResources.SuccessMessage;
+
+                    TempData[NotificationKeys.Success] = AppResources.SuccessMessage;
+
                     return RedirectToAction("List");
                 }
                 catch (Exception)

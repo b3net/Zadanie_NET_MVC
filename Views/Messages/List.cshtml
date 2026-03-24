@@ -1,6 +1,6 @@
-@model IEnumerable<Project.Models.MessageModel>
+@model Project.Models.MessageListViewModel
 @using Project.Resources
-  
+
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>@ViewBag.Title</h2>
     @Html.ActionLink(AppResources.NewMessage, "Create", null, new { @class = "btn btn-primary" })
@@ -10,43 +10,43 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th class="col-name @(ViewBag.CurrentSort == "first_name" || ViewBag.CurrentSort == "first_name_desc" ? "active-sort" : "")">
-                    <a href="@Url.Action("List", new { sortOrder = ViewBag.FirstNameSortParm })" class="sort-link">
-                        @AppResources.FirstName @Html.SortIcon("first_name", (string)ViewBag.CurrentSort)
+                <th class="col-name @(Model.CurrentSort == "first_name" || Model.CurrentSort == "first_name_desc" ? "active-sort" : "")">
+                    <a href="@Url.Action("List", new { sortOrder = Model.FirstNameSortParm })" class="sort-link">
+                        @AppResources.FirstName @Html.SortIcon("first_name", Model.CurrentSort)
                     </a>
                 </th>
-                <th class="col-name @(ViewBag.CurrentSort == "last_name" || ViewBag.CurrentSort == "last_name_desc" ? "active-sort" : "")">
-                    <a href="@Url.Action("List", new { sortOrder = ViewBag.LastNameSortParm })" class="sort-link">
-                        @AppResources.LastName @Html.SortIcon("last_name", (string)ViewBag.CurrentSort)
+                <th class="col-name @(Model.CurrentSort == "last_name" || Model.CurrentSort == "last_name_desc" ? "active-sort" : "")">
+                    <a href="@Url.Action("List", new { sortOrder = Model.LastNameSortParm })" class="sort-link">
+                        @AppResources.LastName @Html.SortIcon("last_name", Model.CurrentSort)
                     </a>
                 </th>
-                <th class="col-email @(ViewBag.CurrentSort == "email" || ViewBag.CurrentSort == "email_desc" ? "active-sort" : "")">
-                    <a href="@Url.Action("List", new { sortOrder = ViewBag.EmailSortParm })" class="sort-link">
-                        @AppResources.Email @Html.SortIcon("email", (string)ViewBag.CurrentSort)
+                <th class="col-email @(Model.CurrentSort == "email" || Model.CurrentSort == "email_desc" ? "active-sort" : "")">
+                    <a href="@Url.Action("List", new { sortOrder = Model.EmailSortParm })" class="sort-link">
+                        @AppResources.Email @Html.SortIcon("email", Model.CurrentSort)
                     </a>
                 </th>
                 <th class="col-message">
                     @AppResources.Message
                 </th>
-                <th class="col-date @(string.IsNullOrEmpty(ViewBag.CurrentSort) || ViewBag.CurrentSort == "date" || ViewBag.CurrentSort == "date_desc" ? "active-sort" : "")">
-                    <a href="@Url.Action("List", new { sortOrder = ViewBag.DateSortParm })" class="sort-link">
-                        @AppResources.Date @Html.SortIcon("date", (string)ViewBag.CurrentSort)
+                <th class="col-date @(string.IsNullOrEmpty(Model.CurrentSort) || Model.CurrentSort == "date" || Model.CurrentSort == "date_desc" ? "active-sort" : "")">
+                    <a href="@Url.Action("List", new { sortOrder = Model.DateSortParm })" class="sort-link">
+                        @AppResources.Date @Html.SortIcon("date", Model.CurrentSort)
                     </a>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @if (Model != null)
+            @if (Model.Messages != null)
             {
-                foreach (var item in Model)
+                foreach (var item in Model.Messages)
                 {
                     <tr>
                         <td class="text-truncate">@item.FirstName</td>
                         <td class="text-truncate">@item.LastName</td>
                         <td class="text-truncate">@item.Email</td>
                         <td class="text-break">
-                            <span class="message-preview-trigger" 
-                                  onclick="previewMessage(this)" 
+                            <span class="message-preview-trigger"
+                                  onclick="previewMessage(this)"
                                   data-full-content="@item.Content"
                                   title="@AppResources.Preview"
                                   style="cursor: pointer; display: block;">
@@ -64,7 +64,7 @@
 @Html.Partial("~/Views/Shared/Components/_MessagePreviewModal.cshtml")
 
 <div class="d-flex justify-content-end">
-    @Html.Partial("~/Views/Shared/Components/_Pagination.cshtml")
+    @Html.Partial("~/Views/Shared/Components/_Pagination.cshtml", Model.Pagination)
 </div>
 
 @section Scripts {
