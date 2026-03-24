@@ -54,5 +54,13 @@
     "Email": "artur.skrobisz@gmail.com",
     "Content": "<b>Wytyczne:</b><br><ul><li>Wykonać analizę,</li><li>Sporządzić raport,</li></ul><div><b><i><u><font color=\"#4533cc\">Sformatowany tekst</font></u></i></b></div>",
     "CreatedAt": "2026-03-13T16:46:31.2542938+01:00"
+  },
+  {
+    "Id": "c5aa5698-b0a3-40d0-a5ec-d9dedcd1129c",
+    "FirstName": "Tomasz",
+    "LastName": "Zaradny",
+    "Email": "tomek@dodo.eu",
+    "Content": "Gratuluję zaliczenia testu.",
+    "CreatedAt": "2026-03-24T08:36:06.7353556+01:00"
   }
 ]

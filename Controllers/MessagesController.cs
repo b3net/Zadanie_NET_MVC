@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Project.Models;
 using Project.Infrastructure;
 using Project.Resources;
+using Project.Infrastructure.Message;
 
 namespace Project.Controllers
 {
@@ -13,7 +14,8 @@ namespace Project.Controllers
 
         public MessagesController()
         {
-            _repository = new MessageRepository();
+            var storage = new MessageFileStorage();
+            _repository = new MessageRepository(storage);
         }
 
         public ActionResult List(string sortOrder, int? page)

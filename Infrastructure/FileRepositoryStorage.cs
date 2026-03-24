@@ -4,11 +4,10 @@ using Newtonsoft.Json;
 
 namespace Project.Infrastructure
 {
-    public abstract class RepositoryBase<T> where T : class
+    public abstract class FileRepositoryStorage<T> : IRepository<T> where T : class
     {
         protected readonly string FilePath;
-
-        protected RepositoryBase(string filePath)
+        protected FileRepositoryStorage(string filePath)
         {
             FilePath = filePath;
             EnsureDirectoryExists();
